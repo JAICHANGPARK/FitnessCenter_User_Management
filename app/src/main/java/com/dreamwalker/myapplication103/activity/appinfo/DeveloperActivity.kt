@@ -21,6 +21,7 @@ class DeveloperActivity : AppCompatActivity() {
             intent.putExtra(WEB_URL, "https://github.com/JAICHANGPARK")
             startActivity(intent)
         }
+
         qiitaButton.setOnClickListener {
 
             val intent = Intent(this, WebActivity::class.java)

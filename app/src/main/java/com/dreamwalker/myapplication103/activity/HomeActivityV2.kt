@@ -25,6 +25,10 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         setContentView(R.layout.activity_home_v2)
         setSupportActionBar(toolbar)
 
+        animation_view.setOnClickListener {
+            toast("꿀렁꿀렁")
+        }
+
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -46,18 +50,21 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         card_search.setOnClickListener {
             toast("회원 조회")
-            val intent = Intent(this@HomeActivityV2, CheckNFCActivity::class.java)
             val alertDialog = AlertDialog.Builder(this)
             alertDialog.setTitle("검색 방식")
             alertDialog.setMessage("어떻게 검색하시겠어요?")
-            alertDialog.setPositiveButton("NFC 사용"){
-                dialog, which ->  
+            alertDialog.setPositiveButton("NFC 사용") { dialog, which ->
+                dialog.dismiss()
+                val intent = Intent(this@HomeActivityV2, CheckNFCActivity::class.java)
+                intent.putExtra(NFC_METHOD_INTENT, NFC_USER_SEARCH)
+                startActivity(intent)
             }
-            alertDialog.setNegativeButton("이름으로 검색"){
-                dialog, which ->  
+            alertDialog.setNegativeButton("이름으로 검색") { dialog, which ->
+
+                dialog.dismiss()
             }
-            intent.putExtra(NFC_METHOD_INTENT, NFC_USER_SEARCH)
-            startActivity(intent)
+
+            alertDialog.show()
         }
 
         card_management.setOnClickListener {
@@ -87,7 +94,11 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
+            R.id.action_settings -> {
+                val intent = Intent(this@HomeActivityV2, SettingActivity::class.java)
+                startActivity(intent)
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
