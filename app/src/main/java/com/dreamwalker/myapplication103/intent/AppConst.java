@@ -8,4 +8,6 @@ public class AppConst {
     public static int NFC_USER_DEBUG = 0x02;
 
     public static String NFC_METHOD_INTENT = "com.dreamwalker.myapplication103.intent.method";
+    public static String WEB_URL = "com.dreamwalker.myapplication103.intent.web.url";
+
 }
