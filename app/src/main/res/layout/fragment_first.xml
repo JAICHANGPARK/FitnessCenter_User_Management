@@ -16,11 +16,12 @@
         app:lottie_rawRes="@raw/sushi_fitness" />
 
     <TextView
+        android:layout_margin="8dp"
         android:textSize="20sp"
         android:textColor="@android:color/black"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="본 앱은 센터 회원 관리 등록을 위한 관리자용 앱입니다."
+        android:text="본 앱은 센터 회원 관리 등록을 `위한 관리자용 앱입니다."
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

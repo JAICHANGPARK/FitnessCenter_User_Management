@@ -109,17 +109,36 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
             R.id.nav_register -> {
                 // Handle the camera action
+                val intent = Intent(this@HomeActivityV2, CheckNFCActivity::class.java)
+                intent.putExtra(NFC_METHOD_INTENT, NFC_USER_REGISTER)
+                startActivity(intent)
 
             }
 
             R.id.nav_search -> {
 
+                val alertDialog = AlertDialog.Builder(this)
+                alertDialog.setTitle("검색 방식")
+                alertDialog.setMessage("어떻게 검색하시겠어요?")
+                alertDialog.setPositiveButton("NFC 사용") { dialog, which ->
+                    dialog.dismiss()
+                    val intent = Intent(this@HomeActivityV2, CheckNFCActivity::class.java)
+                    intent.putExtra(NFC_METHOD_INTENT, NFC_USER_SEARCH)
+                    startActivity(intent)
+                }
+                alertDialog.setNegativeButton("이름으로 검색") { dialog, which ->
+
+                    dialog.dismiss()
+                }
+
+                alertDialog.show()
+
             }
 
             R.id.nav_nfc -> {
 
-
                 val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra(NFC_METHOD_INTENT, NFC_USER_DEBUG)
                 startActivity(intent)
 
             }

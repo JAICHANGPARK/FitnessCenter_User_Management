@@ -44,6 +44,7 @@ public class IntroActivity extends AppIntro {
         if (!isFirstRun){
             Intent newIntent = new Intent(IntroActivity.this, LoginActivity.class);
             startActivity(newIntent);
+            finish();
         }
     }
 
