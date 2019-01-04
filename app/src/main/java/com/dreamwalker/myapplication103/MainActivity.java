@@ -6,12 +6,17 @@ import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.logging.Logger;
+
+import androidx.appcompat.app.AppCompatActivity;
+import io.paperdb.Paper;
+
+import static com.dreamwalker.myapplication103.intent.AppConst.NFC_CACHE_PAPER_NAME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,10 +25,16 @@ public class MainActivity extends AppCompatActivity {
     private NfcAdapter nfcAdapter;
     TextView textViewInfo, textViewTagInfo, textViewBlock;
 
+    // TODO: 2019-01-04 0x00 회원 등록,  0x01 회원 조회 , 0x02 면 테그 디버깅
+    int nfcMethod;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Paper.init(this);
+
+        nfcMethod = Paper.book().read(NFC_CACHE_PAPER_NAME);
 
         textViewInfo = (TextView) findViewById(R.id.info);
         textViewTagInfo = (TextView) findViewById(R.id.taginfo);
@@ -39,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+
     }
 
     @Override
@@ -47,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String action = intent.getAction();
+        Logger.getLogger(getPackageName()).warning(action);
 
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-            Toast.makeText(this, "onResume() - ACTION_TAG_DISCOVERED", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "onResume() - ACTION_TAG_DISCOVERED", Toast.LENGTH_SHORT).show();
 
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             if (tag == null) {
@@ -88,6 +101,28 @@ public class MainActivity extends AppCompatActivity {
 
                 readMifareClassic(tag);
             }
+
+            switch (nfcMethod){
+                case 0x00:
+                    Log.e(TAG, "onResume: 회원 등록으로 들어왔어요" );
+
+                    break;
+
+                case 0x01:
+
+                    Log.e(TAG, "onResume: 회원 조회으로 들어왔어요" );
+                    break;
+
+                case 0x02:
+                    Log.e(TAG, "onResume: 테그 확인 으로 들어왔어요" );
+
+                    break;
+            }
+
+            Paper.book().write("nfc_check", 0x00);
+
+
+
         } else {
             Toast.makeText(this, "onResume() : " + action, Toast.LENGTH_SHORT).show();
         }

@@ -20,7 +20,7 @@
         android:textColor="@android:color/black"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="본 앱은 센터 회원 관리 등록을 위한 앱입니다."
+        android:text="본 앱은 센터 회원 관리 등록을 위한 관리자용 앱입니다."
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

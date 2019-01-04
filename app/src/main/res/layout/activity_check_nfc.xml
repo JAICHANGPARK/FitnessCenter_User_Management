@@ -6,4 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".activity.CheckNFCActivity">
 
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/animation_view"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            app:lottie_autoPlay="true"
+            app:lottie_imageAssetsFolder="images/"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/scan_sensor" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="소지하고 있는 테그를 접촉시켜주세요"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

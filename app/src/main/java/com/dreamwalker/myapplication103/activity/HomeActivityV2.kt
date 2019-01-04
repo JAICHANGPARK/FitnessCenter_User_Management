@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.dreamwalker.myapplication103.MainActivity
 import com.dreamwalker.myapplication103.R
+import com.dreamwalker.myapplication103.intent.AppConst.*
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_home_v2.*
@@ -37,11 +39,25 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         card_register.setOnClickListener {
             toast("회원 등록")
             val intent = Intent(this@HomeActivityV2, CheckNFCActivity::class.java)
+            intent.putExtra(NFC_METHOD_INTENT, NFC_USER_REGISTER)
             startActivity(intent)
+
         }
 
         card_search.setOnClickListener {
             toast("회원 조회")
+            val intent = Intent(this@HomeActivityV2, CheckNFCActivity::class.java)
+            val alertDialog = AlertDialog.Builder(this)
+            alertDialog.setTitle("검색 방식")
+            alertDialog.setMessage("어떻게 검색하시겠어요?")
+            alertDialog.setPositiveButton("NFC 사용"){
+                dialog, which ->  
+            }
+            alertDialog.setNegativeButton("이름으로 검색"){
+                dialog, which ->  
+            }
+            intent.putExtra(NFC_METHOD_INTENT, NFC_USER_SEARCH)
+            startActivity(intent)
         }
 
         card_management.setOnClickListener {
