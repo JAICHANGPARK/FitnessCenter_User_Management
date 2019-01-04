@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application103</string>
+    <string name="app_name">환자관리앱(등록,조회)</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

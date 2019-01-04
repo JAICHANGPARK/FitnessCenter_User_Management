@@ -7,8 +7,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dreamwalker.myapplication103.R
 import com.dreamwalker.myapplication103.intent.AppConst.BASE_URL
+import com.dreamwalker.myapplication103.intent.AppConst.PAPER_AUTO_LOGIN_NAME
 import com.dreamwalker.myapplication103.model.Validate
 import com.dreamwalker.myapplication103.remote.IUploadAPI
+import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_login2.*
 import org.jetbrains.anko.toast
 import retrofit2.Call
@@ -27,6 +29,15 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login2)
+        
+        Paper.init(this)
+        val autoLogin = Paper.book().read<Boolean>(PAPER_AUTO_LOGIN_NAME, false)
+
+        if(autoLogin){
+            val intent = Intent(this, HomeActivityV2::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         retrofit = Retrofit
                 .Builder()
@@ -37,8 +48,7 @@ class LoginActivity : AppCompatActivity() {
         service = retrofit.create(IUploadAPI::class.java)
 
 
-//        val intent = Intent(this, HomeActivityV2::class.java)
-//        startActivity(intent)
+
 
         next_button.setOnClickListener {
             if (!isPasswordValid(password_edt.text!!)) {
@@ -58,9 +68,12 @@ class LoginActivity : AppCompatActivity() {
                             Logger.getLogger(packageName).warning("" + result)
 
                             if (result.equals("true")) {
+                                Paper.book().write(PAPER_AUTO_LOGIN_NAME, true)
+
                                 val intent = Intent(this@LoginActivity, HomeActivityV2::class.java)
                                 startActivity(intent)
                                 finish()
+
                             } else {
                                 val builder = AlertDialog.Builder(this@LoginActivity)
                                 builder.setTitle("Error")

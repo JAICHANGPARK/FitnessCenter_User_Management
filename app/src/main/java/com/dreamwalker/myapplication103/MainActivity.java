@@ -10,6 +10,8 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dreamwalker.myapplication103.activity.UserRegisterActivity;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -105,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
             switch (nfcMethod){
                 case 0x00:
                     Log.e(TAG, "onResume: 회원 등록으로 들어왔어요" );
-
+                    Intent registrationIntent = new Intent(this, UserRegisterActivity.class);
+                    startActivity(registrationIntent);
+                    finish();
                     break;
 
                 case 0x01:

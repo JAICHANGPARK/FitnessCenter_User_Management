@@ -3,6 +3,40 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState>
+              <option name="children">
+                <map>
+                  <entry key="imageAssetPanel">
+                    <value>
+                      <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="launcher">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundLayerName" value="ic_launcher_background_2" />
+                                      <entry key="foregroundImage" value="C:\Users\2E313JCP\Documents\GitHub\FitnessCenter_User_Management\app_res\icons\playstore\icon.png" />
+                                      <entry key="foregroundLayerName" value="ic_launcher_foreground_2" />
+                                      <entry key="outputName" value="ic_launcher_2" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </PersistentState>
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>

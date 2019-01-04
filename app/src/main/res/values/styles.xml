@@ -18,6 +18,9 @@
         <item name="viewInflaterClass">androidx.appcompat.app.AppCompatViewInflater</item>
     </style>
 
+    <style name="AppTheme.UserRegistration" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    </style>
+
 
 
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
