@@ -3,6 +3,7 @@ package com.dreamwalker.myapplication103.activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dreamwalker.myapplication103.MainActivity
 import com.dreamwalker.myapplication103.R
@@ -34,8 +35,18 @@ class LoginActivity : AppCompatActivity() {
         }
 
         cancel_button.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            val dialog = AlertDialog.Builder(this)
+
+            dialog.setTitle("알림")
+            dialog.setMessage("본 앱은 회원가입이 불가능합니다. 관리자에게 문의하세요")
+
+            dialog.setPositiveButton(android.R.string.yes) { dialog, _ ->
+                dialog.dismiss()
+            }
+
+            dialog.show()
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
 
     }
