@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import io.paperdb.Paper;
 
 import static com.dreamwalker.myapplication103.intent.AppConst.NFC_CACHE_PAPER_NAME;
+import static com.dreamwalker.myapplication103.intent.AppConst.NFC_TAG_ID_INTENT;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        StringBuilder tagID = new StringBuilder();
         Intent intent = getIntent();
         String action = intent.getAction();
         Logger.getLogger(getPackageName()).warning(action);
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewInfo.setText("tag == null");
             } else {
                 String tagInfo = tag.toString() + "\n";
+
 
                 tagInfo += "\nTag Id: \n";
                 byte[] tagId = tag.getId();
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for (int i = 0; i < tagId.length; i++) {
                     tagInfo += String.format("%02x", tagId[i]);
+                    tagID.append(String.format("%02x", tagId[i]));
 //                    tagInfo += Integer.toHexString(tagId[i] & 0xFF) + " ";
                 }
 
@@ -97,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for (int i = 0; i < techList.length; i++) {
                     tagInfo += techList[i] + "\n ";
+                    
                 }
 
                 textViewInfo.setText(tagInfo);
@@ -108,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0x00:
                     Log.e(TAG, "onResume: 회원 등록으로 들어왔어요" );
                     Intent registrationIntent = new Intent(this, UserRegisterActivity.class);
+                    registrationIntent.putExtra(NFC_TAG_ID_INTENT, tagID.toString());
                     startActivity(registrationIntent);
                     finish();
                     break;

@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login2)
-        
+
         Paper.init(this)
         val autoLogin = Paper.book().read<Boolean>(PAPER_AUTO_LOGIN_NAME, false)
 
