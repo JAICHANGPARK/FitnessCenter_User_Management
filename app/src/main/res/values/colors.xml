@@ -3,4 +3,23 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="blacks">@android:color/black</color>
+    <color name="black_translucent_87">#DE000000</color>
+    <color name="black_translucent_54">#8A000000</color>
+    <color name="black_translucent_38">#61000000</color>
+    <color name="black_translucent_20">#33000000</color>
+    <color name="black_translucent_15">#26000000</color>
+    <color name="black_translucent_12">#1F000000</color>
+
+    <color name="white">@android:color/white</color>
+    <color name="white_translucent_70">#80ffffff</color>
+    <color name="white_translucent_50">#B3ffffff</color>
+    <color name="white_translucent_38">#61ffffff</color>
+    <color name="white_translucent_12">#1Fffffff</color>
+
+
+    <!-- Elements -->
+    <color name="divider">@color/black_translucent_12</color>
+    <color name="default_background">#FAFAFA</color>
 </resources>

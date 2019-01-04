@@ -1,7 +1,8 @@
 package com.dreamwalker.myapplication103.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.dreamwalker.myapplication103.R
 
 class SettingActivity : AppCompatActivity() {
 

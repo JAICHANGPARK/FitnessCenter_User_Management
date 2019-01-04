@@ -93,6 +93,9 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
             R.id.nav_setting -> {
 
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+
             }
 
         }
