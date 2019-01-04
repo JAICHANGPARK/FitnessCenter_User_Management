@@ -36,6 +36,8 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         card_register.setOnClickListener {
             toast("회원 등록")
+            val intent = Intent(this@HomeActivityV2, CheckNFCActivity::class.java)
+            startActivity(intent)
         }
 
         card_search.setOnClickListener {
@@ -44,6 +46,9 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         card_management.setOnClickListener {
             toast("관리")
+            val intent = Intent(this, SettingActivity::class.java)
+            startActivity(intent)
+
         }
     }
 
@@ -77,6 +82,7 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
             R.id.nav_register -> {
                 // Handle the camera action
+
             }
 
             R.id.nav_search -> {

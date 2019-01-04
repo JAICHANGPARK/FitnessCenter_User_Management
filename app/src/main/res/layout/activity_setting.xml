@@ -96,6 +96,8 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/accessory_button"
+                app:backgroundTint="@android:color/white"
+                android:textColor="@android:color/black"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,6 +132,8 @@
                 android:background="@color/divider"/>
 
             <com.google.android.material.button.MaterialButton
+                app:backgroundTint="@android:color/white"
+                android:textColor="@android:color/black"
                 android:id="@+id/about_app_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
@@ -139,6 +143,8 @@
                 android:text="앱에 대해서"/>
 
             <com.google.android.material.button.MaterialButton
+                app:backgroundTint="@android:color/white"
+                android:textColor="@android:color/black"
                 android:id="@+id/licenses_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
@@ -148,6 +154,8 @@
                 android:text="라이센스"/>
 
             <com.google.android.material.button.MaterialButton
+                app:backgroundTint="@android:color/white"
+                android:textColor="@android:color/black"
                 android:id="@+id/developer_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
@@ -157,6 +165,8 @@
                 android:text="개발자"/>
 
             <com.google.android.material.button.MaterialButton
+                app:backgroundTint="@android:color/white"
+                android:textColor="@android:color/black"
                 android:id="@+id/feedback_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"

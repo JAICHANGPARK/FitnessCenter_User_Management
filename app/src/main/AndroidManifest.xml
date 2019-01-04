@@ -24,20 +24,20 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.nfc.action.TAG_DISCOVERED" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.nfc.action.TECH_DISCOVERED" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            <!--<meta-data-->
+                <!--android:name="android.nfc.action.TECH_DISCOVERED"-->
+                <!--android:resource="@xml/nfc_tech_filter" />-->
 
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc_tech_filter" />
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -59,9 +59,12 @@
             android:name=".activity.HomeActivityV2"
             android:label="@string/title_activity_home_v2"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.CheckNFCActivity">
 
-        <activity android:name=".activity.SettingActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        </activity>
     </application>
 
 </manifest>
