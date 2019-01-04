@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.dreamwalker.myapplication103.MainActivity
 import com.dreamwalker.myapplication103.R
 import kotlinx.android.synthetic.main.activity_login2.*
 
@@ -22,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
             } else {
                 password_text_input.error = null
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             }
         }
