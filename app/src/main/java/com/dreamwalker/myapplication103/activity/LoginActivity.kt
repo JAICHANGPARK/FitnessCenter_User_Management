@@ -15,13 +15,16 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login2)
 
+        val intent = Intent(this, HomeActivityV2::class.java)
+        startActivity(intent)
+
         next_button.setOnClickListener {
             if (!isPasswordValid(password_edt.text!!)) {
                 password_text_input.error = "error"
 
             } else {
                 password_text_input.error = null
-                val intent = Intent(this, HomeActivity::class.java)
+                val intent = Intent(this, HomeActivityV2::class.java)
                 startActivity(intent)
             }
         }

@@ -41,10 +41,10 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".activity.LoginActivity"
-            android:theme="@style/AppTheme.Login"></activity>
+            android:theme="@style/AppTheme.Login" />
         <activity
             android:name=".activity.IntroActivity"
             android:theme="@style/AppTheme.AppIntro">
@@ -54,7 +54,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomeActivity"></activity>
+        <activity android:name=".activity.HomeActivity" />
+        <activity
+            android:name=".activity.HomeActivityV2"
+            android:label="@string/title_activity_home_v2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.SettingActivity"></activity>
     </application>
 
 </manifest>
