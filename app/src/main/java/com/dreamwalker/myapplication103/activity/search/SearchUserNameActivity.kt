@@ -25,9 +25,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class SearchUserNameActivity : AppCompatActivity(), OnSearchItemClickListener {
-    override fun onSearchItemClick(v: View?, position: Int) {
-        toast(position)
-    }
+
+
 
     lateinit var retrofit: Retrofit
     lateinit var service: ISearchAPI
@@ -48,7 +47,6 @@ class SearchUserNameActivity : AppCompatActivity(), OnSearchItemClickListener {
         userList = ArrayList()
 
         searchAdapter = SearchAdapter(this@SearchUserNameActivity, userList as ArrayList<SearchResult>)
-        searchAdapter.setOnSearchItemClickListener(this)
 
         with(recycler_view) {
             setHasFixedSize(true)
@@ -103,8 +101,12 @@ class SearchUserNameActivity : AppCompatActivity(), OnSearchItemClickListener {
 
         })
 
+        searchAdapter.setOnSearchItemClickListener(this)
 
+    }
 
+    override fun onSearchItemClick(v: View?, position: Int) {
+        toast("" + position)
     }
 
     //컬러 리소스로 변경(예 : R.color.deep_blue)
