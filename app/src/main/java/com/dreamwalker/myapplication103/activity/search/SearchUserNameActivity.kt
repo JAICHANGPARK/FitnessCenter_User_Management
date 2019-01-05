@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -106,7 +107,17 @@ class SearchUserNameActivity : AppCompatActivity(), OnSearchItemClickListener {
     }
 
     override fun onSearchItemClick(v: View?, position: Int) {
-        toast("" + position)
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle("장치 연결 알림")
+        alertDialog.setMessage(Integer.toString(position) +  "장치와 연결하여 RFID 정보를 확인합니다.")
+        alertDialog.setPositiveButton(android.R.string.ok) {
+            dialog, which ->
+
+            dialog.dismiss()
+
+        }
+
+        alertDialog.show()
     }
 
     //컬러 리소스로 변경(예 : R.color.deep_blue)

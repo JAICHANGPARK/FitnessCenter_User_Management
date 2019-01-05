@@ -63,7 +63,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     public class SearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name, tag, regiDate, phone;
 
-        public SearchViewHolder(View itemView) {
+         SearchViewHolder(View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.user_name_textview);
