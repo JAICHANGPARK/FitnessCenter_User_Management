@@ -22,4 +22,6 @@
     <!-- Elements -->
     <color name="divider">@color/black_translucent_12</color>
     <color name="default_background">#FAFAFA</color>
+
+    <color name="sample">#6200EE</color>
 </resources>

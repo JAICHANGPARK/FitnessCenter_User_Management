@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.dreamwalker.myapplication103.R
 import com.dreamwalker.myapplication103.activity.device.esp32.DeviceScanActivity
+import com.dreamwalker.myapplication103.activity.search.SearchUserNameActivity
 import com.dreamwalker.myapplication103.intent.AppConst.*
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -61,6 +62,8 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             }
             alertDialog.setNegativeButton("이름으로 검색") { dialog, which ->
 
+                val intent = Intent(this@HomeActivityV2, SearchUserNameActivity::class.java)
+                startActivity(intent)
                 dialog.dismiss()
             }
 

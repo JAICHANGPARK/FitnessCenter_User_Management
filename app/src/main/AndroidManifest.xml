@@ -85,16 +85,20 @@
         <activity
             android:name=".activity.TagManagementActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.search.NFCSearchUserActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.search.NFCSearchUserActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.device.esp32.DeviceScanActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.device.esp32.DeviceControlActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name=".service.esp32.nfcreader.ESPBleService"/>
+        <service android:name=".service.esp32.nfcreader.ESPBleService" />
+
+        <activity android:name=".activity.search.SearchUserNameActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
