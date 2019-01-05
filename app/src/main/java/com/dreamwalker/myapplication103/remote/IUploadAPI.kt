@@ -18,4 +18,16 @@ interface IUploadAPI {
     @FormUrlEncoded
     @POST("fitness_center/UserRegister.php")
     fun registerUser(@Field("userID") name: String, @Field("userPassword") pwd: String): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("fitness_center/UserInfoRegister.php")
+    fun userInfoRegister(@Field("userTag") userTag:String,
+                         @Field("userName") userName:String,
+
+                         @Field("userSex") userSex:String,
+                         @Field("userAge") userAge:String,
+                         @Field("userBirth") userBirth:String,
+                         @Field("userPhone") userPhone:String,
+                         @Field("userEmail") userEmail:String
+                         ) : Call<Validate>
 }
