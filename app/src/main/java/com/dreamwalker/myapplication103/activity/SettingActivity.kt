@@ -13,6 +13,11 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
+        accessory_button.setOnClickListener {
+            val intent = Intent(this@SettingActivity, TagManagementActivity::class.java)
+            startActivity(intent)
+        }
+
         developer_button.setOnClickListener {
             val intent = Intent(this@SettingActivity, DeveloperActivity::class.java)
             startActivity(intent)

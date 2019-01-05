@@ -74,8 +74,11 @@
         <activity
             android:name=".activity.WebActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.UserRegisterActivity"
-            android:theme="@style/AppTheme.UserRegistration"></activity>
+        <activity
+            android:name=".activity.UserRegisterActivity"
+            android:theme="@style/AppTheme.UserRegistration" />
+        <activity android:name=".activity.TagManagementActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
