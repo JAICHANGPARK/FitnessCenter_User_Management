@@ -4,14 +4,13 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamwalker.myapplication103.R
-import com.dreamwalker.myapplication103.adapter.search.OnSearchItemClickListener
-import com.dreamwalker.myapplication103.adapter.search.SearchAdapter
+import com.dreamwalker.myapplication103.adapter.device.scan.DeviceItemClickListener
+import com.dreamwalker.myapplication103.adapter.search.SearchAdapterV2
 import com.dreamwalker.myapplication103.intent.AppConst
 import com.dreamwalker.myapplication103.model.SearchResult
 import com.dreamwalker.myapplication103.remote.ISearchAPI
@@ -25,16 +24,22 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class SearchUserNameActivity : AppCompatActivity(), OnSearchItemClickListener {
+class SearchUserNameActivity : AppCompatActivity(), DeviceItemClickListener {
+    override fun onItemClick(v: View?, position: Int) {
+        toast("" + position)
 
+    }
+
+    override fun onItemLongClick(v: View?, position: Int) {
+    }
 
 
     lateinit var retrofit: Retrofit
     lateinit var service: ISearchAPI
     private var tagID: String? = null
 
-    var userList: List<SearchResult>? = null
-    lateinit var searchAdapter: SearchAdapter
+    lateinit var userList: List<SearchResult>
+    lateinit var searchAdapter: SearchAdapterV2
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,8 +52,8 @@ class SearchUserNameActivity : AppCompatActivity(), OnSearchItemClickListener {
 
         userList = ArrayList()
 
-        searchAdapter = SearchAdapter(this@SearchUserNameActivity, userList as ArrayList<SearchResult>)
-
+        searchAdapter = SearchAdapterV2(userList as ArrayList<SearchResult>, this@SearchUserNameActivity )
+        searchAdapter.setDeviceItemClickListener(this)
         with(recycler_view) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@SearchUserNameActivity)
@@ -77,9 +82,11 @@ class SearchUserNameActivity : AppCompatActivity(), OnSearchItemClickListener {
                             // Logger.getLogger(packageName).warning(response.body().toString())
                             val result = response.body()
                             if (result != null) {
-                                userList = result
-                                searchAdapter = SearchAdapter(this@SearchUserNameActivity, result as java.util.ArrayList<SearchResult>?)
-                                recycler_view.adapter = searchAdapter
+                                (userList as ArrayList<SearchResult>).clear()
+                                (userList as ArrayList<SearchResult>).addAll(result)
+                                searchAdapter.notifyDataSetChanged()
+//                                searchAdapter = SearchAdapterV2( result as java.util.ArrayList<SearchResult>?, this@SearchUserNameActivity)
+//                                recycler_view.adapter = searchAdapter
 //                    for (sr : SearchResult in result){
 //                        toast(sr.userName)
 //                    }
@@ -93,7 +100,7 @@ class SearchUserNameActivity : AppCompatActivity(), OnSearchItemClickListener {
                 }
 
 
-                return true
+                return false
             }
 
             override fun onQueryTextChange(newText: CharSequence?) {
@@ -102,23 +109,10 @@ class SearchUserNameActivity : AppCompatActivity(), OnSearchItemClickListener {
 
         })
 
-        searchAdapter.setOnSearchItemClickListener(this)
+
 
     }
 
-    override fun onSearchItemClick(v: View?, position: Int) {
-        val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle("장치 연결 알림")
-        alertDialog.setMessage(Integer.toString(position) +  "장치와 연결하여 RFID 정보를 확인합니다.")
-        alertDialog.setPositiveButton(android.R.string.ok) {
-            dialog, which ->
-
-            dialog.dismiss()
-
-        }
-
-        alertDialog.show()
-    }
 
     //컬러 리소스로 변경(예 : R.color.deep_blue)
     private fun updateStatusBarColor() {
