@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <uses-feature
         android:name="android.hardware.bluetooth_le"
@@ -84,11 +85,15 @@
         <activity
             android:name=".activity.TagManagementActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name=".activity.NFCSearchUserActivity" />
-
-        <activity android:name=".activity.device.esp32.DeviceScanActivity"
+        <activity
+            android:name=".activity.device.esp32.DeviceScanActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.device.esp32.DeviceControlActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <service android:name=".service.esp32.nfcreader.ESPBleService"/>
     </application>
 
 </manifest>

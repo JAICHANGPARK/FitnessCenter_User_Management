@@ -25,6 +25,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamwalker.myapplication103.R
 import com.dreamwalker.myapplication103.adapter.device.scan.DeviceItemClickListener
 import com.dreamwalker.myapplication103.adapter.device.scan.DeviceScanAdapterV2
+import com.dreamwalker.myapplication103.intent.AppConst.BLE_ADDRESS_INTENT
+import com.dreamwalker.myapplication103.model.Device
+import com.dreamwalker.myapplication103.service.esp32.nfcreader.DeviceConst
+import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_device_scan.*
 import org.jetbrains.anko.toast
 import java.util.*
@@ -79,10 +83,11 @@ class DeviceScanActivity : AppCompatActivity(), DeviceItemClickListener {
         }
 
 
+        checkScanPermission()
         getBluetoothAdapter()
         checkBluetoothSupport()
         checkBleSupport()
-        checkScanPermission()
+
 
         if (!(bluetoothAdapter?.isEnabled!!)) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
@@ -120,7 +125,7 @@ class DeviceScanActivity : AppCompatActivity(), DeviceItemClickListener {
     }
 
     private fun checkBleSupport() {
-        if (packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+        if (!packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             toast("BLE를 지원하지 않는 기종입니다.")
             finish()
         }
@@ -223,7 +228,7 @@ class DeviceScanActivity : AppCompatActivity(), DeviceItemClickListener {
 
     private fun getScanFilters(): List<ScanFilter> {
         val allFilters = ArrayList<ScanFilter>()
-        val scanFilter0 = ScanFilter.Builder().setDeviceName("SmartTray").build()
+        val scanFilter0 = ScanFilter.Builder().setDeviceName(DeviceConst.DEVICE_NAME).build()
         allFilters.add(scanFilter0)
         //        ScanFilter scanFilter1 = new ScanFilter.Builder().setDeviceName("").build();
         //        for (DeviceCoordinator coordinator : DeviceHelper.getInstance().getAllCoordinators()) {
@@ -328,6 +333,30 @@ class DeviceScanActivity : AppCompatActivity(), DeviceItemClickListener {
     }
 
     override fun onItemClick(v: View?, position: Int) {
+
+
+        val deviceAddress = bleDeviceList[position].address
+        val deviceName = bleDeviceList[position].name
+        val userDeviceList = ArrayList<Device>()
+        userDeviceList.add(Device(deviceName, deviceAddress))
+
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle("장치 연결 알림")
+        alertDialog.setMessage(deviceName + "장치와 연결하여 RFID 정보를 확인합니다.")
+        alertDialog.setPositiveButton(android.R.string.ok) {
+            dialog, which ->
+
+            Paper.book("user").write("device", userDeviceList)
+            dialog.dismiss()
+
+            val intent = Intent(this@DeviceScanActivity, DeviceControlActivity::class.java)
+            intent.putExtra(BLE_ADDRESS_INTENT, deviceAddress)
+            startActivity(intent)
+            finish()
+        }
+
+        alertDialog.show()
+
 
     }
 

@@ -13,6 +13,7 @@ public class AppConst {
     public static String NFC_TAG_ID_INTENT = "com.dreamwalker.myapplication103.intent.tag.id";
     public static String WEB_URL = "com.dreamwalker.myapplication103.intent.web.url";
 
+    public static String BLE_ADDRESS_INTENT = "com.dreamwalker.myapplication103.intent.ble.address";
     public static final String BASE_URL = "http://kangwonelec.com/";
 
 }

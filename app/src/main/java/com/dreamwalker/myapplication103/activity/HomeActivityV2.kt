@@ -8,7 +8,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.dreamwalker.myapplication103.MainActivity
 import com.dreamwalker.myapplication103.R
 import com.dreamwalker.myapplication103.intent.AppConst.*
 import com.google.android.material.navigation.NavigationView
@@ -137,8 +136,11 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
             R.id.nav_nfc -> {
 
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra(NFC_METHOD_INTENT, NFC_USER_DEBUG)
+//                val intent = Intent(this, MainActivity::class.java)
+//                intent.putExtra(NFC_METHOD_INTENT, NFC_USER_DEBUG)
+//                startActivity(intent)
+                val intent = Intent(this, TagManagementActivity::class.java)
+//                intent.putExtra(NFC_METHOD_INTENT, NFC_USER_DEBUG)
                 startActivity(intent)
 
             }
