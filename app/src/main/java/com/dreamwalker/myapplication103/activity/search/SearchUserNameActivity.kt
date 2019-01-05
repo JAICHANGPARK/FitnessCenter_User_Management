@@ -6,7 +6,6 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamwalker.myapplication103.R
 import com.dreamwalker.myapplication103.adapter.device.scan.DeviceItemClickListener
@@ -47,7 +46,7 @@ class SearchUserNameActivity : AppCompatActivity(), DeviceItemClickListener {
         setContentView(R.layout.activity_search_user_name)
         updateStatusBarColor()
         setSupportActionBar(toolbar)
-        toolbar.title = "이름으로 검색"
+
 
 
         userList = ArrayList()
@@ -57,7 +56,7 @@ class SearchUserNameActivity : AppCompatActivity(), DeviceItemClickListener {
         with(recycler_view) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@SearchUserNameActivity)
-            addItemDecoration(DividerItemDecoration(this@SearchUserNameActivity, DividerItemDecoration.VERTICAL))
+//            addItemDecoration(DividerItemDecoration(this@SearchUserNameActivity, DividerItemDecoration.VERTICAL))
             adapter = searchAdapter
         }
 
