@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dreamwalker.myapplication103.R
+import com.dreamwalker.myapplication103.activity.device.esp32.DeviceScanActivity
 import com.dreamwalker.myapplication103.intent.AppConst
 import kotlinx.android.synthetic.main.activity_tag_management.*
 
@@ -14,7 +15,8 @@ class TagManagementActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tag_management)
 
         device_button.setOnClickListener {
-
+            val intent = Intent(this@TagManagementActivity, DeviceScanActivity::class.java)
+            startActivity(intent)
 
         }
 
