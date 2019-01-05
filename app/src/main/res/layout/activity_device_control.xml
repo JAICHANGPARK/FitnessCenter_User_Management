@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.device.esp32.DeviceControlActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,11 +24,11 @@
                 android:weightSum="2">
 
                 <TextView
-                    android:textColor="@android:color/black"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="연결 상태"
+                    android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
                 <TextView
@@ -47,22 +48,22 @@
                 android:background="@color/divider" />
 
             <com.airbnb.lottie.LottieAnimationView
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
                 android:id="@+id/animation_view"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/blockchain_2" />
 
             <TextView
-                android:textColor="@android:color/black"
-                android:layout_margin="8dp"
-                android:textSize="18sp"
-                android:text="기능"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="기능"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
 
             <LinearLayout
@@ -74,74 +75,76 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/read_button"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="8dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
 
                     <LinearLayout
-                        android:layout_margin="8dp"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_margin="8dp"
-                            android:textColor="@android:color/black"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:textSize="24sp"
-                            android:text="테그 읽기"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="8dp"
+                        android:orientation="vertical">
 
                         <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_margin="8dp"
                             android:gravity="center"
-                            android:layout_gravity="center"
-                            android:textSize="14sp"
-                            android:text="장치에 저장된 RFID(TAG)정보를 읽어옵니다."
+                            android:text="테그 읽기"
+                            android:textColor="@android:color/black"
+                            android:textSize="24sp" />
+
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:gravity="center"
+                            android:text="장치에 저장된 RFID(TAG)정보를 읽어옵니다."
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/delete_button"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="8dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
 
                     <LinearLayout
-                        android:layout_margin="8dp"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_margin="8dp"
-                            android:textColor="@android:color/black"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:textSize="24sp"
-                            android:text="정보 삭제"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="8dp"
+                        android:orientation="vertical">
 
                         <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_margin="8dp"
                             android:gravity="center"
-                            android:layout_gravity="center"
-                            android:textSize="14sp"
-                            android:text="장치에 저장된 RFID(TAG)정보를 초기화 및 삭제합니다."
+                            android:text="정보 삭제"
+                            android:textColor="@android:color/black"
+                            android:textSize="24sp" />
+
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:gravity="center"
+                            android:text="장치에 저장된 RFID(TAG)정보를 초기화 및 삭제합니다."
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
@@ -161,11 +164,11 @@
                 android:weightSum="3">
 
                 <TextView
-                    android:textColor="@android:color/black"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="테그 정보 : "
+                    android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
                 <TextView
@@ -177,12 +180,25 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
+            <com.google.android.material.button.MaterialButton
+                app:icon="@drawable/ic_person_add_black_24dp"
+                android:id="@+id/user_register_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="회원 등록" />
 
+            <com.google.android.material.button.MaterialButton
+                app:icon="@drawable/ic_search_black_24dp"
+                android:id="@+id/user_search_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="회원 검색" />
 
 
         </LinearLayout>
     </ScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

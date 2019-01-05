@@ -14,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dreamwalker.myapplication103.R
+import com.dreamwalker.myapplication103.activity.UserRegisterActivity
 import com.dreamwalker.myapplication103.intent.AppConst.BLE_ADDRESS_INTENT
+import com.dreamwalker.myapplication103.intent.AppConst.NFC_TAG_ID_INTENT
 import com.dreamwalker.myapplication103.service.esp32.nfcreader.ESPBleService
 import kotlinx.android.synthetic.main.activity_device_control.*
 import org.jetbrains.anko.toast
@@ -32,8 +34,7 @@ class DeviceControlActivity : AppCompatActivity() {
     private var mConnected = false
 
     var count = 0
-
-
+    var tagID : StringBuilder? = null
     private val mServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(componentName: ComponentName, service: IBinder) {
             val binder = service as ESPBleService.LocalBinder
@@ -76,6 +77,7 @@ class DeviceControlActivity : AppCompatActivity() {
 
                 if (values != null) {
                     tag_textview.text = values
+                    tagID?.append(values)
                     val trimsValue = values.split(",")
                     count++
                 }
@@ -100,6 +102,7 @@ class DeviceControlActivity : AppCompatActivity() {
         setContentView(R.layout.activity_device_control)
 
         mDeviceAddress = intent.getStringExtra(BLE_ADDRESS_INTENT)
+        tagID = StringBuilder()
 
         checkPermission()
         checkBLESupport()
@@ -111,6 +114,8 @@ class DeviceControlActivity : AppCompatActivity() {
         }
 
         read_button.setOnClickListener {
+            tagID?.setLength(0)
+
             if (mBluetoothLeService != null) {
                 val writeCheck = mBluetoothLeService!!.readCardInformation()
 
@@ -133,6 +138,16 @@ class DeviceControlActivity : AppCompatActivity() {
                     toast("프로토콜 전송 실패")
                 }
             }
+        }
+        user_register_button.setOnClickListener {
+            val registrationIntent = Intent(this, UserRegisterActivity::class.java)
+            registrationIntent.putExtra(NFC_TAG_ID_INTENT, tagID.toString())
+            startActivity(registrationIntent)
+//            finish()
+        }
+
+        user_search_button.setOnClickListener {
+
         }
 
 

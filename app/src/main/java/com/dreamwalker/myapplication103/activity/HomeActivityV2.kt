@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.dreamwalker.myapplication103.R
+import com.dreamwalker.myapplication103.activity.device.esp32.DeviceScanActivity
 import com.dreamwalker.myapplication103.intent.AppConst.*
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -64,6 +65,12 @@ class HomeActivityV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             }
 
             alertDialog.show()
+        }
+
+        device_connect.setOnClickListener {
+            val intent = Intent(this, DeviceScanActivity::class.java)
+            startActivity(intent)
+
         }
 
         card_management.setOnClickListener {
