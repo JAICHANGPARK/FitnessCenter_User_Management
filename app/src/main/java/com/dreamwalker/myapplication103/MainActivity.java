@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
                 textViewInfo.setText(tagInfo);
 
-                readMifareClassic(tag);
+
             }
 
             switch (nfcMethod){
@@ -124,12 +124,11 @@ public class MainActivity extends AppCompatActivity {
 
                 case 0x02:
                     Log.e(TAG, "onResume: 테그 확인 으로 들어왔어요" );
-
+                    readMifareClassic(tag);
                     break;
             }
 
             Paper.book().write("nfc_check", 0x00);
-
 
 
         } else {

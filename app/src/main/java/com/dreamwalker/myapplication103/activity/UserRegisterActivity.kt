@@ -17,6 +17,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
+import java.util.logging.Logger
 
 
 class UserRegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
@@ -44,7 +45,7 @@ class UserRegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_register)
         val tagId = intent.getStringExtra(NFC_TAG_ID_INTENT)
-        userTag = tagId
+        userTag = tagId.toUpperCase()
         title = "TAG Address : " + tagId.toUpperCase()
 
         retrofit = Retrofit.Builder().baseUrl(AppConst.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build()
@@ -157,6 +158,7 @@ class UserRegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
 
                     override fun onResponse(call: Call<Validate>, response: Response<Validate>) {
                         val result = response.body()?.success
+                        Logger.getLogger(packageName).warning("" + result)
                         if (result.equals("true")) {
                             finish()
                         } else {
