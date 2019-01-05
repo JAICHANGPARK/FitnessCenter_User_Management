@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
@@ -22,11 +23,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dreamwalker.myapplication103.R
+import com.dreamwalker.myapplication103.adapter.device.scan.DeviceItemClickListener
+import com.dreamwalker.myapplication103.adapter.device.scan.DeviceScanAdapterV2
 import kotlinx.android.synthetic.main.activity_device_scan.*
 import org.jetbrains.anko.toast
 import java.util.*
 
-class DeviceScanActivity : AppCompatActivity() {
+class DeviceScanActivity : AppCompatActivity(), DeviceItemClickListener {
+
 
     private val PERMISSION_REQUEST_COARSE_LOCATION = 1000
     private val REQUEST_ENABLE_BT = 1
@@ -42,6 +46,8 @@ class DeviceScanActivity : AppCompatActivity() {
     internal lateinit var handler: Handler
 
     internal var mScanning: Boolean = false
+
+    lateinit var adapter: DeviceScanAdapterV2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +84,7 @@ class DeviceScanActivity : AppCompatActivity() {
         checkBleSupport()
         checkScanPermission()
 
-        if (!bluetoothAdapter.isEnabled()) {
+        if (!(bluetoothAdapter?.isEnabled!!)) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
         } else {
@@ -86,12 +92,14 @@ class DeviceScanActivity : AppCompatActivity() {
             //                mediaPlayer.start();
             //            }
             adapter = DeviceScanAdapterV2(bleDeviceList, scanResultArrayList, this)
+            adapter.setDeviceItemClickListener(this)
             recyclerView.adapter = adapter
             scanLeDevice(true)
+
             //            StateButton.setText("STOP");
         }
 
-        adapter.setDeviceItemClickListener(this)
+
 
 
     }
@@ -244,11 +252,11 @@ class DeviceScanActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_device_scan, menu)
 
         if (!mScanning) {
-            menu?.findItem(R.id.cancel).isVisible = false
-            menu?.findItem(R.id.scan).isVisible = true
+            menu?.findItem(R.id.cancel)?.isVisible = false
+            menu?.findItem(R.id.scan)?.isVisible = true
         } else {
-            menu?.findItem(R.id.cancel).isVisible = true
-            menu?.findItem(R.id.scan).isVisible = false
+            menu?.findItem(R.id.cancel)?.isVisible = true
+            menu?.findItem(R.id.scan)?.isVisible = false
         }
 
         return true
@@ -317,6 +325,14 @@ class DeviceScanActivity : AppCompatActivity() {
         bleDeviceList.clear()
         adapter.notifyDataSetChanged()
         super.onPause()
+    }
+
+    override fun onItemClick(v: View?, position: Int) {
+
+    }
+
+    override fun onItemLongClick(v: View?, position: Int) {
+
     }
 
 

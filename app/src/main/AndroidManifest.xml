@@ -84,8 +84,11 @@
         <activity
             android:name=".activity.TagManagementActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".activity.NFCSearchUserActivity" />
-        <activity android:name=".activity.device.esp32.DeviceScanActivity"></activity>
+
+        <activity android:name=".activity.device.esp32.DeviceScanActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
