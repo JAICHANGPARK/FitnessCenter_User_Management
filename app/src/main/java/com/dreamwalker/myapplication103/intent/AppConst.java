@@ -11,6 +11,7 @@ public class AppConst {
 
     public static String NFC_METHOD_INTENT = "com.dreamwalker.myapplication103.intent.method";
     public static String NFC_TAG_ID_INTENT = "com.dreamwalker.myapplication103.intent.tag.id";
+    public static String NFC_SEARCH_TAG_ID_INTENT = "com.dreamwalker.myapplication103.intent.tag.id.search";
     public static String WEB_URL = "com.dreamwalker.myapplication103.intent.web.url";
 
     public static String BLE_ADDRESS_INTENT = "com.dreamwalker.myapplication103.intent.ble.address";

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dreamwalker.myapplication103.activity.UserRegisterActivity;
+import com.dreamwalker.myapplication103.activity.search.NFCSearchUserActivity;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import io.paperdb.Paper;
 
 import static com.dreamwalker.myapplication103.intent.AppConst.NFC_CACHE_PAPER_NAME;
+import static com.dreamwalker.myapplication103.intent.AppConst.NFC_SEARCH_TAG_ID_INTENT;
 import static com.dreamwalker.myapplication103.intent.AppConst.NFC_TAG_ID_INTENT;
 
 public class MainActivity extends AppCompatActivity {
@@ -118,8 +120,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case 0x01:
-
+                    Intent searchIntent = new Intent(this, NFCSearchUserActivity.class);
+                    searchIntent.putExtra(NFC_SEARCH_TAG_ID_INTENT, tagID.toString().toUpperCase());
+                    startActivity(searchIntent);
                     Log.e(TAG, "onResume: 회원 조회으로 들어왔어요" );
+                    finish();
                     break;
 
                 case 0x02:
