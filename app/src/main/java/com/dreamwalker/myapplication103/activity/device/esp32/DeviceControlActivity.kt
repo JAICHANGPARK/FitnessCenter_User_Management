@@ -74,7 +74,8 @@ class DeviceControlActivity : AppCompatActivity() {
             } else if (ESPBleService.ACTION_DATA_AVAILABLE == action) {
                 val values = intent.getStringExtra(ESPBleService.EXTRA_DATA)
 
-                if (values != null){
+                if (values != null) {
+                    tag_textview.text = values
                     val trimsValue = values.split(",")
                     count++
                 }
@@ -93,6 +94,7 @@ class DeviceControlActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_control)
@@ -109,19 +111,28 @@ class DeviceControlActivity : AppCompatActivity() {
         }
 
         read_button.setOnClickListener {
+            if (mBluetoothLeService != null) {
+                val writeCheck = mBluetoothLeService!!.readCardInformation()
 
-            var writeCheck = ESPBleService().readCardInformation()
-
-            if(writeCheck){
-                toast("프로토콜 전송 성공")
-            }else{
-                toast("프로토콜 전송 실패")
+                if (writeCheck) {
+                    toast("프로토콜 전송 성공")
+                } else {
+                    toast("프로토콜 전송 실패")
+                }
             }
 
         }
 
         delete_button.setOnClickListener {
+            if (mBluetoothLeService != null) {
+                val writeCheck = mBluetoothLeService!!.deleteCardInformation()
 
+                if (writeCheck) {
+                    toast("프로토콜 전송 성공")
+                } else {
+                    toast("프로토콜 전송 실패")
+                }
+            }
         }
 
 

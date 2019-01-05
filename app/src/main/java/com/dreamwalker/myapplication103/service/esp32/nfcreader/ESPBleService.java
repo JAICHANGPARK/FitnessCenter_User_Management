@@ -35,10 +35,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
-
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -114,23 +110,6 @@ public class ESPBleService extends Service {
 
                     break;
                 case ACTION_SERVICE_SCAN_DONE:
-                    Log.e(TAG, "onReceive: " + "서비스 스캔 끝 : 동기화 시작 --> 장비 인증 시작");
-//
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mRealtimeWriteCharacteristic != null) {
-                                firstPhaseCheckerFlag = deviceAuth(mRealtimeWriteCharacteristic);
-                                Log.e(TAG, "onReceive: ACTION_SERVICE_SCAN_DONE --> " + firstPhaseCheckerFlag);
-
-//                                if (firstPhaseCheckerFlag) {
-//                                    broadcastUpdate(ACTION_REAL_TIME_FIRST_PHASE);
-//                                }
-                            }
-
-                        }
-                    }, 2000);
-
 
                     break;
 
@@ -304,12 +283,6 @@ public class ESPBleService extends Service {
 
             final byte[] data = characteristic.getValue();
 
-            String values = null;
-            String soups = null;
-            String sideAs = null;
-            String sideBs = null;
-            String sideCs = null;
-            String sideDs = null;
             if (data != null && data.length > 0) {
 
                 for (byte byteChar : data) {
@@ -317,134 +290,24 @@ public class ESPBleService extends Service {
 
                 }
 
-                if (data[0] == -1) {
-                    values = "0 ";
-                } else {
-                    float floatVal;
-                    final int intVal = (data[0] << 8) & 0xff00 | (data[1] & 0x00ff);
-//                    floatVal = (float) intVal / 100;
-//                    values = String.format("%.2f", floatVal);
-                    values = String.valueOf(intVal);
-
-                    final int soup = (data[2] << 8) & 0xff00 | (data[3] & 0x00ff);
-                    soups = String.valueOf(soup);
-
-                    final int sideA = (data[4] << 8) & 0xff00 | (data[5] & 0x00ff);
-                    sideAs = String.valueOf(sideA);
-
-                    final int sideB = (data[6] << 8) & 0xff00 | (data[7] & 0x00ff);
-//                    floatVal = (float) intVal / 100;
-                    sideBs = String.valueOf(sideB);
-
-                    final int sideC = (data[8] << 8) & 0xff00 | (data[9] & 0x00ff);
-//                    floatVal = (float) intVal / 100;
-                    sideCs = String.valueOf(sideC);
-                    final int sideD = (data[10] << 8) & 0xff00 | (data[11] & 0x00ff);
-//                    floatVal = (float) intVal / 100;
-                    sideDs = String.valueOf(sideD);
-                }
 
             }
 
-            intent.putExtra(EXTRA_DATA,
-                    "Rice:" + values + "g, "
-                            + "soup:" + soups + "g, "
-                            + "sideA:" + sideAs + "g, "
-                            + "sideB:" + sideBs + "g, "
-                            + "sideC:" + sideCs + "g, "
-                            + "sideD:" + sideDs + "g ");
+            intent.putExtra(EXTRA_DATA, "");
 
         } else if (ESP32GattAttributes.BLE_CHAR_CUSTOM_REALTIME.equals(characteristic.getUuid())) {
+            // TODO: 2019-01-05 장치에서 값을 가져온다.
 
             final byte[] data = characteristic.getValue();
-
-            String values = null;
-
-            if (data != null && data.length > 0) {
-                if (data[0] == 0x02 && data[1] == 0x10 && data[2] == 0x03) {
-                    Log.e(TAG, "broadcastUpdate: " + "1차 인증 성공");
-//                    Toasty.success(getApplicationContext(), "1차 인증 성공", Toast.LENGTH_SHORT).show();
-                    broadcastUpdate(ACTION_SERVICE_SCAN_DONE);
-                }
-                if (data[0] == 0x02 && data[1] == 0x11 && data[2] == 0x03) {
-//                    Toasty.success(getApplicationContext(), "암호화 인증 성공", Toast.LENGTH_SHORT).show();
-                    Log.e(TAG, "broadcastUpdate: " + "장비 암호화 인증 성공");
-                    broadcastUpdate(ACTION_FIRST_PHASE_DONE);
-                }
-                if (data[0] == 0x02 && data[1] == 0x21 && data[2] == 0x03) {
-                    Log.e(TAG, "broadcastUpdate: " + "장비 암호화 인증 실패");
-//                    broadcastUpdate(ACTION_FIRST_PHASE_DONE);
-                }
-                if (data[0] == 0x02 && data[1] == 0x12 && data[2] == 0x03) {
-                    Log.e(TAG, "broadcastUpdate: " + "모든 인증 완료 ");
-                    broadcastUpdate(ACTION_SECOND_PHASE_DONE);
-                } else {
-
-                    for (byte byteChar : data) {
-                        Log.e(TAG, "broadcastUpdate: --> " + byteChar);
-                    }
-
-                    float floatVal;
-
-                    if (data[0] == -1) {
-
-                        values = "0.0,";
-
-                    } else {
-                        final int intVal = (data[0] << 8) & 0xff00 | (data[1] & 0xff);
-                        floatVal = (float) intVal / 100;
-                        values = String.format("%.1f", floatVal) + ",";
-
-                    }
-
-                    if (data[2] == -1) {
-                        values += "0.0,";
-                    } else {
-                        final int intSoup = (data[2] << 8) & 0xff00 | (data[3] & 0xff);
-                        floatVal = (float) intSoup / 100;
-                        values += String.format("%.1f", floatVal) + ",";
-                    }
-
-                    if (data[4] == -1) {
-                        values += "0.0,";
-                    } else {
-                        final int intSideA = (data[4] << 8) & 0xff00 | (data[5] & 0xff);
-                        floatVal = (float) intSideA / 100;
-                        values += String.format("%.1f", floatVal) + ",";
-                    }
-
-                    if (data[6] == -1) {
-                        values += "0.0,";
-                    } else {
-                        final int intSideB = (data[6] << 8) & 0xff00 | (data[7] & 0xff);
-                        floatVal = (float) intSideB / 100;
-                        values += String.format("%.1f", floatVal) + ",";
-                    }
-
-                    if (data[8] == -1) {
-                        values += "0.0,";
-                    } else {
-                        final int intSideC = (data[8] << 8) & 0xff00 | (data[9] & 0xff);
-                        floatVal = (float) intSideC / 100;
-                        values += String.format("%.1f", floatVal) + ",";
-                    }
-
-                    if (data[10] == -1) {
-                        values += "0.0,";
-                    } else {
-                        final int intSideD = (data[10] << 8) & 0xff00 | (data[11] & 0xff);
-                        floatVal = (float) intSideD / 100;
-                        values += String.format("%.1f", floatVal);
-                    }
-
-
-                    Log.e(TAG, "broadcastUpdate: " + values);
-
-
-                }
+            final StringBuilder stringBuilder = new StringBuilder(data.length);
+            Log.e(TAG, "data in ");
+            for (byte byteChar : data) {
+                Log.e(TAG, "broadcastUpdate: --> " + String.format("%02x", byteChar).toUpperCase());
+                stringBuilder.append(String.format("%02X", byteChar).toUpperCase());
             }
 //            intent.putExtra(EXTRA_DATA, values + "g");
-            intent.putExtra(EXTRA_DATA, values);
+            intent.putExtra(EXTRA_DATA, stringBuilder.toString());
+
         } else {
             // For all other profiles, writes the data formatted in HEX.
             final byte[] data = characteristic.getValue();
@@ -649,6 +512,20 @@ public class ESPBleService extends Service {
 
     }
 
+    public boolean deleteCardInformation(){
+        if(mRealtimeWriteCharacteristic == null) return false;
+
+        byte[] temp = new byte[4];
+        temp[0] = (byte) (0x02);
+        temp[1] = (byte) (0x70);
+        temp[2] = (byte) (0x07);
+        temp[3] = (byte) (0x03);
+
+        mRealtimeWriteCharacteristic.setValue(temp);
+        return mBluetoothGatt.writeCharacteristic(mRealtimeWriteCharacteristic);
+
+    }
+
     private boolean startRealTimeSignal(BluetoothGattCharacteristic characteristic) {
         byte[] temp = new byte[4];
 
@@ -690,30 +567,6 @@ public class ESPBleService extends Service {
     }
 
 
-    private boolean deviceAuth(BluetoothGattCharacteristic characteristic) {
-
-        byte[] authBytes = sha256Bytes("smartfoodtray");
-        byte[] sendBytes = new byte[20];
-
-
-        sendBytes[0] = 0x02;
-        sendBytes[1] = 0x71;
-
-        System.arraycopy(authBytes, 0, sendBytes, 2, 17);
-
-        sendBytes[19] = 0x03;
-
-
-        for (byte b : sendBytes) {
-            Log.e(TAG, "deviceAuth: " + b);
-        }
-
-        characteristic.setValue(sendBytes);
-
-        return mBluetoothGatt.writeCharacteristic(characteristic);
-
-    }
-
     private boolean enableResultNotification(final BluetoothGatt gatt) {
         if (mTreadmillCharacteristic == null) {
             return false;
@@ -738,58 +591,4 @@ public class ESPBleService extends Service {
         return result;
     }
 
-
-    private byte[] sha256Bytes(String input) {
-        return hashBytes("SHA-256", input);
-    }
-
-    private String sha256(String input) {
-        return hashString("SHA-256", input);
-    }
-
-    private String hashString(String type, String input) {
-        String HEX_CHARS = "0123456789ABCDEF";
-        byte[] bytes = new byte[0];
-        try {
-            bytes = MessageDigest.getInstance(type).digest(input.getBytes());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        StringBuilder result = new StringBuilder(bytes.length * 2);
-        for (byte it : bytes) {
-            int i = (int) it;
-            result.append(HEX_CHARS.charAt(i >> 4 & 0x0f));
-            result.append(HEX_CHARS.charAt(i & 0x0f));
-        }
-//        bytes.forEach {
-//            val i = it.toInt()
-//            result.append(HEX_CHARS[i shr 4 and 0x0f])
-//            result.append(HEX_CHARS[i and 0x0f])
-//        }
-
-        return result.toString();
-    }
-
-    private byte[] hashBytes(String type, String input) {
-        String HEX_CHARS = "0123456789ABCDEF";
-        byte[] bytes = new byte[0];
-        try {
-            bytes = MessageDigest.getInstance(type).digest(input.getBytes());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        StringBuilder result = new StringBuilder(bytes.length * 2);
-        for (byte it : bytes) {
-            int i = (int) it;
-            result.append(HEX_CHARS.charAt(i >> 4 & 0x0f));
-            result.append(HEX_CHARS.charAt(i & 0x0f));
-        }
-//        bytes.forEach {
-//            val i = it.toInt()
-//            result.append(HEX_CHARS[i shr 4 and 0x0f])
-//            result.append(HEX_CHARS[i and 0x0f])
-//        }
-
-        return bytes;
-    }
 }
