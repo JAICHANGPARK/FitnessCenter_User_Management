@@ -15,8 +15,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dreamwalker.myapplication103.R
 import com.dreamwalker.myapplication103.activity.UserRegisterActivity
-import com.dreamwalker.myapplication103.intent.AppConst.BLE_ADDRESS_INTENT
-import com.dreamwalker.myapplication103.intent.AppConst.NFC_TAG_ID_INTENT
+import com.dreamwalker.myapplication103.activity.search.NFCSearchUserActivity
+import com.dreamwalker.myapplication103.intent.AppConst.*
 import com.dreamwalker.myapplication103.service.esp32.nfcreader.ESPBleService
 import kotlinx.android.synthetic.main.activity_device_control.*
 import org.jetbrains.anko.toast
@@ -148,6 +148,10 @@ class DeviceControlActivity : AppCompatActivity() {
 
         user_search_button.setOnClickListener {
 
+            val searchIntent = Intent(this, NFCSearchUserActivity::class.java)
+            searchIntent.putExtra(NFC_SEARCH_TAG_ID_INTENT, tagID.toString().toUpperCase())
+            startActivity(searchIntent)
+            
         }
 
 

@@ -61,7 +61,7 @@ class DeviceScanActivity : AppCompatActivity(), DeviceItemClickListener {
         tool_bar.setNavigationOnClickListener { v ->
             val builder = AlertDialog.Builder(this@DeviceScanActivity)
             builder.setTitle("알림")
-            builder.setMessage("장비(지능형 식판) 검색을 종료하시겠어요?")
+            builder.setMessage("장비(RFID 리더기) 검색을 종료하시겠어요?")
             builder.setPositiveButton(android.R.string.yes) {
                 dialog, which ->
                 dialog.dismiss()
