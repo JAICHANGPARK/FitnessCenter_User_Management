@@ -151,7 +151,7 @@ class DeviceControlActivity : AppCompatActivity() {
             val searchIntent = Intent(this, NFCSearchUserActivity::class.java)
             searchIntent.putExtra(NFC_SEARCH_TAG_ID_INTENT, tagID.toString().toUpperCase())
             startActivity(searchIntent)
-            
+
         }
 
 
