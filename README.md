@@ -2,6 +2,7 @@
 
 Fitness Center Diabetes Management App
 
+<img src="https://github.com/JAICHANGPARK/FitnessCenter_User_Management/blob/master/app_res/Mockup-Generated-by-Dunnnk.jpg" width="400">
 
 ### Release 1.0.0
 
